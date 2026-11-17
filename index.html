@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>System Verification Engineering Manifesto</title>
+<meta name="description" content="Verify every change. Keep verifying the system. Learn from every outcome. The manifesto for System Verification Engineering (SVE).">
+<meta property="og:title" content="System Verification Engineering Manifesto">
+<meta property="og:description" content="Verify every change. Keep verifying the system. Learn from every outcome.">
+<meta property="og:url" content="https://systemverification.org/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://systemverification.org/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✓</text></svg>">
+<style>
+  :root { --ink:#1a1a1a; --muted:#666; --accent:#0b5d4b; --bg:#fbfaf7; --rule:#e2ded5; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink:#e8e6e1; --muted:#9a968e; --accent:#5fc2a5; --bg:#141414; --rule:#2c2b28; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font:18px/1.65 Georgia, "Iowan Old Style", "Times New Roman", serif; }
+  main { max-width:44rem; margin:0 auto; padding:4rem 1.5rem 3rem; }
+  header { border-bottom:1px solid var(--rule); padding-bottom:2rem; margin-bottom:2.5rem; }
+  .kicker { font:600 .8rem/1 system-ui, sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:2.4rem; line-height:1.15; margin:.6rem 0 1rem; font-weight:normal; }
+  .meta { font:.9rem system-ui, sans-serif; color:var(--muted); }
+  h2 { font:600 1.05rem system-ui, sans-serif; letter-spacing:.02em; margin:2.75rem 0 .75rem; color:var(--accent); }
+  p { margin:0 0 1.1rem; }
+  .lede { font-size:1.25rem; }
+  ol.principles { padding-left:1.4rem; }
+  ol.principles li { margin-bottom:1.1rem; padding-left:.3rem; }
+  ol.principles strong { display:block; }
+  blockquote { margin:3rem 0; padding:1.5rem 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    font-size:1.45rem; line-height:1.4; text-align:center; }
+  .note { font-size:.95rem; color:var(--muted); }
+  footer { margin-top:3.5rem; padding-top:1.5rem; border-top:1px solid var(--rule);
+    font:.85rem/1.6 system-ui, sans-serif; color:var(--muted); }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="kicker">Manifesto</div>
+  <h1>System Verification Engineering</h1>
+  <div class="meta">Version 1.0 · 16 November 2026 · Testfold and Carver Agents · <a href="SVE_Manifesto_v1_0.pdf">PDF</a></div>
+</header>
+
+<h2>The change we face</h2>
+<p class="lede">We are building increasingly complex software while knowing less about the code inside it.</p>
+<p>Coding agents can produce implementations faster than engineers can understand their decisions. Multiple agents can change interacting components simultaneously. The resulting systems may themselves contain agents that learn, reason, use tools and act in changing environments.</p>
+<p>We expect machine-generated change to grow. AI can produce changes faster than we can establish that they work. Verification is becoming the bottleneck: our capacity to check and correct the system must keep pace with our capacity to change it.</p>
+<p>We need to build delivery around verification and engineer how we establish trust.</p>
+<p>Code should earn trust through verification. Every change should be checked, and the system should remain under verification as it operates. The question is whether its behavior adheres to the goals we have set, within the conditions and limits we have defined.</p>
+
+<h2>Why a new discipline is needed</h2>
+<p>Much of this work already exists, distributed across organizations.</p>
+<p>Developers check implementations. QA tests behavior. Support reproduces failures. DevOps and platform engineers maintain execution and delivery infrastructure. SRE teams investigate production behavior. Reinforcement learning teams design objectives, environments and rewards that shape agent behavior. Agent runtime teams build observability, evaluations and execution controls.</p>
+<p>Each sees part of the system. Each uses different mechanisms to judge whether it is working. But the connection between those judgments is often weak. A production failure may never improve a training environment. A support reproduction may never become a protected regression test. A passing evaluator may conceal a gap in the goal it was supposed to represent.</p>
+<p>We believe engineering organizations must reorganize around verification outcomes, with explicit roles and teams responsible for the verification and learning system.</p>
+
+<h2>The purpose of SVE</h2>
+<p>We propose System Verification Engineering.</p>
+<p>SVE organizes engineering around continuously verifying system behavior, validating it against intended goals, and learning from observed outcomes. It brings specifications, checks, operational evidence and correction into one discipline, improving both the software and the mechanisms used to assess it.</p>
+<p>This builds on earlier advances. Agile strengthened feedback around requirements. DevOps connected development and operation. SRE made reliability an explicit engineering responsibility. SVE extends these foundations to systems whose implementation and behavior increasingly exceed what people can inspect directly.</p>
+
+<h2>Learning from imperfect goals and checks</h2>
+<p>It also starts with a limitation we must acknowledge: our goals are incomplete, and our verification mechanisms are approximate.</p>
+<p>Specifications omit intent. Tests simplify environments. Rewards can favor the wrong behavior. Evaluators can accept convincing failures. Observability reveals only what we have instrumented.</p>
+<p>Real-world failures will expose these gaps. They must improve both the software and the machinery used to judge it.</p>
+
+<h2>The organization we foresee</h2>
+<p>We expect SVE to become a distinct engineering discipline, with practitioners progressing from SVE I and SVE II to senior and staff roles. Product-aligned teams, such as SVE Team: Loan Products, will build and operate verification across their domain. Shared SVE platform teams can supply reusable infrastructure.</p>
+<p>Developers, QA engineers, SREs, support engineers and RL and runtime specialists provide foundations for these roles. Some responsibilities will reorganize into SVE teams. Each domain will need its own expertise and stack, with shared evidence and learning connecting the organization.</p>
+
+<h2>Our principles</h2>
+<ol class="principles">
+  <li><strong>Trust must be earned through verification.</strong> Authorship, plausible explanations and passing local tests are insufficient grounds for confidence. Require evidence appropriate to the behavior and consequences involved.</li>
+  <li><strong>Verify every change and keep verifying the system.</strong> Apply checks throughout development and operation. Reassess when code, data, dependencies, models, permissions or goals change.</li>
+  <li><strong>Treat goals and checks as revisable engineering artifacts.</strong> State their assumptions and limitations. Test whether evaluators detect meaningful failures and whether their criteria represent the outcomes we actually want.</li>
+  <li><strong>Build product-aligned SVE teams.</strong> Organize verification around product outcomes. Teams combine relevant engineering capabilities and specialist stacks, connecting evidence and learning across development and operation.</li>
+  <li><strong>Turn failures into improvements at the pace of change.</strong> Shorten the path from detection to reproduction, diagnosis, correction and regression verification. If changes arrive at PR speed, our ability to close the gaps they expose must keep pace.</li>
+  <li><strong>Give the whole loop explicit ownership.</strong> SVE teams own the capability, integrity and capacity of verification and learning for their product domain. Product and domain owners remain accountable for intended behavior and acceptable risk.</li>
+</ol>
+
+<blockquote>Verify every change.<br>Keep verifying the system.<br>Learn from every outcome.</blockquote>
+
+<p>We invite practitioners to develop the methods, tools, career paths and teams that make this discipline work, and to judge it by the outcomes it improves.</p>
+
+<h2>Scope of verification</h2>
+<p class="note">Continuous verification means risk-appropriate checks across development and operation. It does not imply exhaustive proof of every possible behavior. Goals and checks remain approximate, and observed outcomes must improve both.</p>
+
+<footer>
+  SVE Manifesto v1.0 · 16 November 2026 · Testfold and Carver Agents (<a href="https://carveragents.ai">carveragents.ai</a>)<br>
+  Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+</footer>
+</main>
+</body>
+</html>
