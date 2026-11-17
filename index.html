@@ -45,6 +45,13 @@
   html { scroll-behavior:smooth; }
   code { font-size:.85em; background:var(--rule); padding:.1em .35em; border-radius:3px; }
   .top { position:fixed; right:1.25rem; bottom:1.25rem; font:600 .8rem system-ui, sans-serif; padding:.5rem .8rem; border:1px solid var(--rule); border-radius:999px; background:var(--bg); text-decoration:none; }
+  mark { background:none; color:inherit; font-weight:bold; box-shadow:inset 0 -.45em 0 rgba(11,93,75,.16); padding:0 .05em; }
+  @media (prefers-color-scheme: dark) { mark { box-shadow:inset 0 -.45em 0 rgba(95,194,165,.25); } }
+  a.sec { color:var(--muted); text-decoration:none; font-weight:normal; margin-right:.35rem; }
+  a.sec:hover { color:var(--accent); }
+  .toc-list { list-style:none; padding-left:0 !important; counter-reset:t; }
+  .toc-list li { counter-increment:t; }
+  .toc-list li::before { content:"§" counter(t); color:var(--muted); display:inline-block; width:2rem; }
 </style>
 </head>
 <body>
@@ -53,37 +60,38 @@
   <div class="kicker">Manifesto</div>
   <h1>System Verification Engineering</h1>
   <div class="meta">Version 1.0 · 16 November 2026 · <a href="https://testfold.ai">Testfold</a> and <a href="https://carveragents.ai">Carver Agents</a> · <a href="SVE_Manifesto_v1_0.pdf">PDF</a> · <a href="https://github.com/carveragents/systemverification.org">GitHub</a></div>
+  <div class="meta">Corresponding author: <a href="mailto:pingali@carveragents.ai">pingali@carveragents.ai</a></div>
 </header>
-<nav class="toc" aria-label="Contents"><div class="kicker">Contents</div><ol><li><a href="#change">The change we face</a></li><li><a href="#why">Why a new discipline is needed</a></li><li><a href="#purpose">The purpose of SVE</a></li><li><a href="#learning">Learning from imperfect goals and checks</a></li><li><a href="#organization">The organization we foresee</a></li><li><a href="#principles">Our principles</a></li><li><a href="#scope">Scope of verification</a></li><li><a href="#resources">Resources</a></li><li><a href="#contribute">Contribute</a></li></ol></nav>
+<nav class="toc" aria-label="Contents"><div class="kicker">Contents</div><ol class="toc-list"><li><a href="#change">The Change We Face</a></li><li><a href="#why">Why a New Discipline Is Needed</a></li><li><a href="#purpose">The Purpose of SVE</a></li><li><a href="#learning">Learning from Imperfect Goals and Checks</a></li><li><a href="#organization">The Organization We Foresee</a></li><li><a href="#principles">Our Principles</a></li><li><a href="#scope">Scope of Verification</a></li><li><a href="#resources">Resources</a></li><li><a href="#contribute">Contribute</a></li></ol></nav>
 
-<h2 id="change">The change we face</h2>
-<p class="lede">We are building increasingly complex software while knowing less about the code inside it.</p>
+<h2 id="change"><a class="sec" href="#change">§1</a> The Change We Face</h2>
+<p><mark>We are building increasingly complex software while knowing less about the code inside it.</mark></p>
 <p>Coding agents can produce implementations faster than engineers can understand their decisions. Multiple agents can change interacting components simultaneously. The resulting systems may themselves contain agents that learn, reason, use tools and act in changing environments.</p>
-<p>We expect machine-generated change to grow. AI can produce changes faster than we can establish that they work. Verification is becoming the bottleneck: our capacity to check and correct the system must keep pace with our capacity to change it.</p>
+<p>We expect machine-generated change to grow. AI can produce changes faster than we can establish that they work. <mark>Verification is becoming the bottleneck</mark>: our capacity to check and correct the system must keep pace with our capacity to change it.</p>
 <p>We need to build delivery around verification and engineer how we establish trust.</p>
-<p>Code should earn trust through verification. Every change should be checked, and the system should remain under verification as it operates. The question is whether its behavior adheres to the goals we have set, within the conditions and limits we have defined.</p>
+<p><mark>Code should earn trust through verification.</mark> Every change should be checked, and the system should remain under verification as it operates. The question is whether its behavior adheres to the goals we have set, within the conditions and limits we have defined.</p>
 
-<h2 id="why">Why a new discipline is needed</h2>
+<h2 id="why"><a class="sec" href="#why">§2</a> Why a New Discipline Is Needed</h2>
 <p>Much of this work already exists, distributed across organizations.</p>
 <p>Developers check implementations. QA tests behavior. Support reproduces failures. DevOps and platform engineers maintain execution and delivery infrastructure. SRE teams investigate production behavior. Reinforcement learning teams design objectives, environments and rewards that shape agent behavior. Agent runtime teams build observability, evaluations and execution controls.</p>
 <p>Each sees part of the system. Each uses different mechanisms to judge whether it is working. But the connection between those judgments is often weak. A production failure may never improve a training environment. A support reproduction may never become a protected regression test. A passing evaluator may conceal a gap in the goal it was supposed to represent.</p>
-<p>We believe engineering organizations must reorganize around verification outcomes, with explicit roles and teams responsible for the verification and learning system.</p>
+<p>We believe <mark>engineering organizations must reorganize around verification outcomes</mark>, with explicit roles and teams responsible for the verification and learning system.</p>
 
-<h2 id="purpose">The purpose of SVE</h2>
-<p>We propose System Verification Engineering.</p>
+<h2 id="purpose"><a class="sec" href="#purpose">§3</a> The Purpose of SVE</h2>
+<p><mark>We propose System Verification Engineering.</mark></p>
 <p>SVE organizes engineering around continuously verifying system behavior, validating it against intended goals, and learning from observed outcomes. It brings specifications, checks, operational evidence and correction into one discipline, improving both the software and the mechanisms used to assess it.</p>
 <p>This builds on earlier advances. Agile strengthened feedback around requirements. DevOps connected development and operation. SRE made reliability an explicit engineering responsibility. SVE extends these foundations to systems whose implementation and behavior increasingly exceed what people can inspect directly.</p>
 
-<h2 id="learning">Learning from imperfect goals and checks</h2>
-<p>It also starts with a limitation we must acknowledge: our goals are incomplete, and our verification mechanisms are approximate.</p>
+<h2 id="learning"><a class="sec" href="#learning">§4</a> Learning from Imperfect Goals and Checks</h2>
+<p>It also starts with a limitation we must acknowledge: <mark>our goals are incomplete, and our verification mechanisms are approximate.</mark></p>
 <p>Specifications omit intent. Tests simplify environments. Rewards can favor the wrong behavior. Evaluators can accept convincing failures. Observability reveals only what we have instrumented.</p>
-<p>Real-world failures will expose these gaps. They must improve both the software and the machinery used to judge it.</p>
+<p>Real-world failures will expose these gaps. <mark>They must improve both the software and the machinery used to judge it.</mark></p>
 
-<h2 id="organization">The organization we foresee</h2>
-<p>We expect SVE to become a distinct engineering discipline, with practitioners progressing from SVE I and SVE II to senior and staff roles. Product-aligned teams, such as SVE Team: Loan Products, will build and operate verification across their domain. Shared SVE platform teams can supply reusable infrastructure.</p>
+<h2 id="organization"><a class="sec" href="#organization">§5</a> The Organization We Foresee</h2>
+<p><mark>We expect SVE to become a distinct engineering discipline</mark>, with practitioners progressing from SVE I and SVE II to senior and staff roles. Product-aligned teams, such as SVE Team: Loan Products, will build and operate verification across their domain. Shared SVE platform teams can supply reusable infrastructure.</p>
 <p>Developers, QA engineers, SREs, support engineers and RL and runtime specialists provide foundations for these roles. Some responsibilities will reorganize into SVE teams. Each domain will need its own expertise and stack, with shared evidence and learning connecting the organization.</p>
 
-<h2 id="principles">Our principles</h2>
+<h2 id="principles"><a class="sec" href="#principles">§6</a> Our Principles</h2>
 <ol class="principles">
   <li><strong>Trust must be earned through verification.</strong> Authorship, plausible explanations and passing local tests are insufficient grounds for confidence. Require evidence appropriate to the behavior and consequences involved.</li>
   <li><strong>Verify every change and keep verifying the system.</strong> Apply checks throughout development and operation. Reassess when code, data, dependencies, models, permissions or goals change.</li>
@@ -97,15 +105,15 @@
 
 <p>We invite practitioners to develop the methods, tools, career paths and teams that make this discipline work, and to judge it by the outcomes it improves.</p>
 
-<h2 id="scope">Scope of verification</h2>
-<p>Continuous verification means risk-appropriate checks across development and operation. It does not imply exhaustive proof of every possible behavior. Goals and checks remain approximate, and observed outcomes must improve both.</p>
+<h2 id="scope"><a class="sec" href="#scope">§7</a> Scope of Verification</h2>
+<p>Continuous verification means risk-appropriate checks across development and operation. <mark>It does not imply exhaustive proof of every possible behavior.</mark> Goals and checks remain approximate, and observed outcomes must improve both.</p>
 
-<h2 id="resources">Resources</h2>
+<h2 id="resources"><a class="sec" href="#resources">§8</a> Resources</h2>
 <ul>
   <li><a href="https://github.com/carveragents/awesome-system-verification"><strong>Awesome System Verification</strong></a>: a curated list of tools, papers and practices for system verification.</li>
 </ul>
 
-<h2 id="contribute">Contribute</h2>
+<h2 id="contribute"><a class="sec" href="#contribute">§9</a> Contribute</h2>
 <p>The manifesto is developed in the open at <a href="https://github.com/carveragents/systemverification.org">github.com/carveragents/systemverification.org</a>.</p>
 <ul>
   <li><strong>Sign the manifesto.</strong> Open a pull request adding one line to <a href="https://github.com/carveragents/systemverification.org/blob/main/SIGNATORIES.md">SIGNATORIES.md</a>: <code>- Your Name, Role, Organization</code></li>
@@ -115,6 +123,7 @@
 
 <footer>
   SVE Manifesto v1.0 · 16 November 2026 · <a href="https://testfold.ai">Testfold</a> and <a href="https://carveragents.ai">Carver Agents</a><br>
+    Corresponding author: <a href="mailto:pingali@carveragents.ai">pingali@carveragents.ai</a><br>
   Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
 </footer>
 </main>
