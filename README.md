@@ -11,12 +11,13 @@ Source for [systemverification.org](https://systemverification.org), home of the
 | `index.html` | The manifesto site (single static page) |
 | `SVE_Manifesto_v1_0.pdf` | PDF version of the manifesto |
 | `SIGNATORIES.md` | People who support the manifesto |
+| `CONTRIBUTING.md` | How to sign and propose changes |
 | `CNAME` | Custom domain for GitHub Pages |
 | `.nojekyll` | Serve files as-is, skip Jekyll |
 
 ## Sign the manifesto
 
-Open a pull request adding one line to `SIGNATORIES.md`:
+See [CONTRIBUTING.md](CONTRIBUTING.md). In short, open a pull request adding one line to `SIGNATORIES.md`:
 
 ```
 - Your Name, Role, Organization
